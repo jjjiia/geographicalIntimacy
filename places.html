@@ -9,6 +9,17 @@
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
+      #info{
+        width:20px;
+        height:20px;
+        border-radius:10px;
+        background-color:#337495;
+        position:absolute;
+        left:5px;
+        top:5px;
+        text-align:center;
+        color:#fff;
+      }
       #map1 {
         height: 110%;
         width:50%;
@@ -83,10 +94,11 @@
     </div>
     <div id="controls">
       <div class = "title">Understanding the scale of big and faraway things by putting them next to big and near things.</div>
-      
-        Understanding the scale of strange places by putting them next to places we have been to.<br/><br/>
-      <p>Try one of these example locations<br/><br/>
+        Understanding the scale of strange places by putting them next to places we know.<br/><br/>
+      <p>Pairs of strange, far, familiar, close places at the same distance.Try one of these example locations<br/><br/>
         <a onclick=changeMap("doubleNegative_spiralJetty") href="#">Michael Heizer's Double Negative | Robert Smithson's Spiral Jetty</a>
+        <br/>        
+        <a onclick=changeMap("doubleNegative_pyramid") href="#">Michael Heizer's Double Negative | The Great Pyramid at Giza</a>
         <br/>
         <a onclick=changeMap("doubleNegative_newYorkCity") href="#">Michael Heizer's Double Negative | New York City</a>
         <br/>
@@ -109,7 +121,7 @@
     
     <script>
     var locations = {
-      doubleNegative:{lat:36.6148, lng:-114.344},
+      doubleNegative:{lat:36.615, lng:-114.344},
       newYorkCity:{lat:40.7294942, lng: -73.9936358},
       greatWall:{lat:40.4332745, lng:116.5475274},
       grandCanyon:{lat:36.0922147, lng:-113.4035584},
@@ -121,7 +133,8 @@
       mediaLab:{lat:42.360523, lng:-71.087243},
       detroitLow:{lat:42.39, lng:-83.09},
       detroitHigh:{lat:42.434955, lng:-83.124},
-      spiralJetty:{lat:41.437702,lng:-112.668}
+      spiralJetty:{lat:41.437702,lng:-112.668},
+      pyramid:{lat:29.976235, lng:31.130980}
     }
     
     var locationLabels = {
@@ -137,14 +150,16 @@
       mediaLab:"The Media Lab",
       detroitLow:"A Detroit area with $14,500 median income",
       detroitHigh:"A Detroit area with $103,587 median income",
-      spiralJetty:"Robert Smithson's Spiral Jetty"
+      spiralJetty:"Robert Smithson's Spiral Jetty",
+      pyramid:"The Great Pyramid at Giza"
     }
     
     var groups = {
       doubleNegative_spiralJetty:17,
+      doubleNegative_pyramid:18,
       doubleNegative_newYorkCity:18,
       greatWall_grandCanyon:15,
-      GoldenGateBridge_BrooklynBridge:17,
+      GoldenGateBridge_BrooklynBridge:15,
       trumpTower_whiteHouse:21,
       myHouse_whiteHouse:21,
       mediaLab_whiteHouse:21,
