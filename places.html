@@ -1,0 +1,222 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scale Comparison</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map1 {
+        height: 110%;
+        width:50%;
+      }      
+      #map2 {
+        height: 110%;
+        width:50%;
+        position:absolute;
+        left:50%;
+        top:0px;
+        overflow:hidden;
+      }
+      #main{
+        height:100%;
+        width:100%;
+        position:absolute;
+        left:0px;
+        top:0px;
+        overflow:hidden;
+      }
+      #controls{
+        font-family:Baskerville;
+        color:#337495;
+        font-size:12px;
+        padding:20px;
+        width:20%;
+        background-color:rgba(255,255,255,.8);
+        position:absolute;
+        left:40%;
+        top:10%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      a{
+        color:#337495;
+        text-decoration:none;
+      }
+  
+      .title{
+        font-size:30px;
+      }
+      #label1{
+        background-color:rgba(255,255,255,.8);
+        position:absolute;
+        bottom:20px;
+        right:50%;
+        padding:10px;
+        margin:1px;
+        
+      }
+      #label2{
+        background-color:rgba(255,255,255,.8);
+        position:absolute;
+        bottom:20px;
+        left:50%;
+        padding:10px;
+        margin:1px;
+      }
+    </style>
+
+  </head>
+  <body>
+    
+    <div id="main">
+      <div id="map1"></div>
+      <div id="map2"></div>
+
+    </div>
+    <div id="controls">
+      <div class = "title">Understanding the scale of big and faraway things by putting them next to big and near things.</div>
+      
+        Understanding the scale of strange places by putting them next to places we have been to.<br/><br/>
+      <p>Try one of these example locations<br/><br/>
+        <a onclick=changeMap("doubleNegative_spiralJetty") href="#">Michael Heizer's Double Negative | Robert Smithson's Spiral Jetty</a>
+        <br/>
+        <a onclick=changeMap("doubleNegative_newYorkCity") href="#">Michael Heizer's Double Negative | New York City</a>
+        <br/>
+        <a onclick=changeMap("greatWall_grandCanyon") href="#">The Great Wall | The Grand Canyon</a>
+        <br/>
+        <a onclick=changeMap("GoldenGateBridge_BrooklynBridge") href="#">Golden Gate Bridge | Brooklyn Bridge</a>
+        <br/>
+        <a onclick=changeMap("myHouse_whiteHouse") href="#">My House | the White House</a>
+        <br/>
+        <a onclick=changeMap("mediaLab_whiteHouse") href="#">Media Lab | the White House</a>
+        <br/>
+        <a onclick=changeMap("detroitLow_detroitHigh") href="#">Detroit Low Income | Detroit High Income</a>
+        <br/>
+      </p>
+    </div>
+    
+    <div id="label1">place 1</div>
+    <div id="label2">place 2</div>
+    
+    
+    <script>
+    var locations = {
+      doubleNegative:{lat:36.6148, lng:-114.344},
+      newYorkCity:{lat:40.7294942, lng: -73.9936358},
+      greatWall:{lat:40.4332745, lng:116.5475274},
+      grandCanyon:{lat:36.0922147, lng:-113.4035584},
+      GoldenGateBridge:{lat:37.8199328, lng:-122.479},
+      BrooklynBridge:{lat:40.7058134, lng:-73.9972},
+      trumpTower:{lat:40.76245, lng:-73.973814},
+      whiteHouse:{lat:38.8974254, lng:-77.0369496},
+      myHouse:{lat:40.645254, lng:-73.967},
+      mediaLab:{lat:42.360523, lng:-71.087243},
+      detroitLow:{lat:42.39, lng:-83.09},
+      detroitHigh:{lat:42.434955, lng:-83.124},
+      spiralJetty:{lat:41.437702,lng:-112.668}
+    }
+    
+    var locationLabels = {
+      doubleNegative:"Michael Heizer's Double Negative",
+      newYorkCity:"New York City",
+      greatWall:"The Great Wall",
+      grandCanyon:"The Grand Canyon",
+      GoldenGateBridge:"Golden Gate Bridge",
+      BrooklynBridge:"Brooklyn Bridge",
+      myHouse:"My House",
+      whiteHouse:"The White House",
+      myHouse:"My House",
+      mediaLab:"The Media Lab",
+      detroitLow:"A Detroit area with $14,500 median income",
+      detroitHigh:"A Detroit area with $103,587 median income",
+      spiralJetty:"Robert Smithson's Spiral Jetty"
+    }
+    
+    var groups = {
+      doubleNegative_spiralJetty:17,
+      doubleNegative_newYorkCity:18,
+      greatWall_grandCanyon:15,
+      GoldenGateBridge_BrooklynBridge:17,
+      trumpTower_whiteHouse:21,
+      myHouse_whiteHouse:21,
+      mediaLab_whiteHouse:21,
+      detroitLow_detroitHigh:18
+    }
+    
+      var map1;
+      var map2;
+      var zoomLevel = 17
+      var group = "doubleNegative_spiralJetty"
+      var location1 = group.split("_")[0]
+      var location2 = group.split("_")[1]
+      
+      function changeMap(group){
+        var location1 = locations[group.split("_")[0]]
+        var location2 = locations[group.split("_")[1]]
+        var zoomLevel = groups[group]
+        console.log(zoomLevel)
+      //  map1.setCenter(location1.lat, location1.lng)
+        
+        var latLng1 = new google.maps.LatLng(location1.lat, location1.lng);
+        var latLng2 = new google.maps.LatLng(location2.lat, location2.lng);
+        map1.panTo(latLng1);
+        map2.panTo(latLng2);
+        map1.setZoom(zoomLevel)
+        map2.setZoom(zoomLevel)
+        
+        document.getElementById("label1").innerHTML = locationLabels[group.split("_")[0]];
+        document.getElementById("label2").innerHTML = locationLabels[group.split("_")[1]];
+      }
+      
+      function initMap() {
+       
+        map1 = new google.maps.Map(document.getElementById('map1'), {
+          center: locations[location1],
+          mapTypeId: 'satellite',
+          zoom: zoomLevel,
+         // disableDefaultUI: true,
+         // scrollwheel: false,
+          navigationControl: false,
+          mapTypeControl: false,
+          zoomControl: true,
+          scaleControl: true,          
+          
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.LEFT_CENTER
+          }
+         // scaleControl: false,
+        });
+        map2 = new google.maps.Map(document.getElementById('map2'), {
+          center: locations[location2],
+           mapTypeId: 'satellite',
+          zoom: zoomLevel,
+          disableDefaultUI: true,
+          disableDefaultUI: true,
+          scrollwheel: false,
+          navigationControl: false,
+          mapTypeControl: false,
+          scaleControl: true,          
+        });
+        
+        map1.setTilt(0)
+        map2.setTilt(0)
+        google.maps.event.addListener(map1, 'zoom_changed', (function () {
+            map2.setZoom(map1.getZoom());
+        }));
+        document.getElementById("label1").innerHTML = locationLabels[group.split("_")[0]];
+        document.getElementById("label2").innerHTML = locationLabels[group.split("_")[1]];
+      }
+    </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApJJ2qv8oTgiEchcOW4Fu5LV_APaloOFg&callback=initMap"
+    async defer>
+      </script>
+  </body>
+</html>
