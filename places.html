@@ -111,6 +111,8 @@
         <a onclick=changeMap("mediaLab_whiteHouse") href="#">Media Lab | the White House</a>
         <br/>
         <a onclick=changeMap("detroitLow_detroitHigh") href="#">Detroit Low Income | Detroit High Income</a>
+        <br/>        
+        <a onclick=changeMap("rikers_libertyIsland") href="#">Rikers Island | Liberty Island</a>
         <br/>
       </p>
     </div>
@@ -134,7 +136,10 @@
       detroitLow:{lat:42.39, lng:-83.09},
       detroitHigh:{lat:42.434955, lng:-83.124},
       spiralJetty:{lat:41.437702,lng:-112.668},
-      pyramid:{lat:29.976235, lng:31.130980}
+      pyramid:{lat:29.976235, lng:31.130980},
+      rikers:{lat:40.79, lng:-73.8842},
+      libertyIsland:{lat:40.689762, lng:-74.045289}
+      
     }
     
     var locationLabels = {
@@ -151,7 +156,9 @@
       detroitLow:"A Detroit area with $14,500 median income",
       detroitHigh:"A Detroit area with $103,587 median income",
       spiralJetty:"Robert Smithson's Spiral Jetty",
-      pyramid:"The Great Pyramid at Giza"
+      pyramid:"The Great Pyramid at Giza",
+      rikers:"Rikers Island Correctional Center and Rikers Island",
+      libertyIsland:"Statue of Liberty and Liberty Island"
     }
     
     var groups = {
@@ -163,7 +170,8 @@
       trumpTower_whiteHouse:21,
       myHouse_whiteHouse:21,
       mediaLab_whiteHouse:21,
-      detroitLow_detroitHigh:18
+      detroitLow_detroitHigh:18,
+      rikers_libertyIsland:15
     }
     
       var map1;
