@@ -171,8 +171,7 @@
           center:libertyIsland,
           zoom: zoomLevel,
           mapTypeId: 'satellite',
-          disableDefaultUI: true,
-          
+          disableDefaultUI: true,          
         });
 
        
@@ -181,6 +180,10 @@
           mapTypeId: 'satellite',
           zoom:  zoomLevel,
           disableDefaultUI: true,
+          scrollwheel: false,
+          navigationControl: false,
+          mapTypeControl: false,
+          scaleControl: true,         
         });
         
         map.setTilt(0)
